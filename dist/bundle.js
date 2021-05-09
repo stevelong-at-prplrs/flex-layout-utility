@@ -440,7 +440,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst 
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! /Users/steve/git/experiments/MultiFrameworkArchitecture/frameworks_and_examples/rgs-interactive-layout/src/index.tsx */\"./src/index.tsx\");\n\n\n//# sourceURL=webpack:///multi_./src/index.tsx?");
+eval("module.exports = __webpack_require__(/*! /Users/steve/git/rgs-interactive-layout/src/index.tsx */\"./src/index.tsx\");\n\n\n//# sourceURL=webpack:///multi_./src/index.tsx?");
 
 /***/ }),
 
