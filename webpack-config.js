@@ -25,5 +25,5 @@ module.exports = [{
         "react-dom": "ReactDOM"
     },
     // devtool: "source-map",
-    watch: false
+    watch: true
 }];

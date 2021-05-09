@@ -5,9 +5,9 @@
   "browser": "dist/index.html",
   "scripts": {
     "serve": "serve dist",
-    "webpack": "webpack --config webpack-config.js",
-    "test": "jest --config ./jest.config.json",
-    "test:watch": "npm run test -- --watch"
+    "webpack-watch": "webpack --config webpack-config.js",
+    "bs": "gulp browser-sync",
+    "dev": "concurrently \"npm run bs\" \"npm run webpack-watch\""
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/stevelong-at-prplrs/rgs-interactive-layout#readme",
   "dependencies": {
+    "concurrently": "^6.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-grid-system": "^7.1.2"
@@ -32,9 +33,11 @@
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/eslint-plugin-tslint": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
+    "browser-sync": "^2.26.14",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
+    "gulp": "^4.0.2",
     "jest": "^26.0.1",
     "react-test-renderer": "^16.13.1",
     "serve": "^11.3.2",
