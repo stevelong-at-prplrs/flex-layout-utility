@@ -5,7 +5,7 @@ var browserSync = require('browser-sync').create();
 gulp.task('browser-sync', function() {
     browserSync.init({
         server: {
-            baseDir: "./dist"
+            baseDir: "./docs"
         }
     });
 });
@@ -19,7 +19,7 @@ gulp.task('browser-sync', function() {
 // });
 
 gulp.watch([
-    'dist/*'
+    'docs/*'
 ]).on("change", function() {
     browserSync.reload();
 });
