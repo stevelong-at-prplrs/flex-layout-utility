@@ -76,12 +76,12 @@ const JustifyAlignExample = () => {
         <Container fluid>
             <h5>justify={justifyValue}</h5>
             <ul className="nav nav-pills">
-                {justifyLinkItems.map(linkItem => <LinkItemGenerator linkText={linkItem.linkText} active={linkItem.linkText === justifyValue} onClick={() => setJustifyValue(linkItem.linkText)} />)}
+                {justifyLinkItems.map((linkItem, i) => <LinkItemGenerator key={"justify-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === justifyValue} onClick={() => setJustifyValue(linkItem.linkText)} />)}
             </ul>
             <br />
             <h5>align={alignValue}</h5>
             <ul className="nav nav-pills">
-                {alignLinkItems.map(linkItem => <LinkItemGenerator linkText={linkItem.linkText} active={linkItem.linkText === alignValue} onClick={() => setAlignValue(linkItem.linkText)} />)}
+                {alignLinkItems.map((linkItem, i) => <LinkItemGenerator key={"align-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === alignValue} onClick={() => setAlignValue(linkItem.linkText)} />)}
             </ul>
             <Row justify={justifyValue} align={alignValue} debug>{children}</Row>
         </Container>
