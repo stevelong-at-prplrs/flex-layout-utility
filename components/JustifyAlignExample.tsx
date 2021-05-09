@@ -83,7 +83,7 @@ const JustifyAlignExample = () => {
             <ul className="nav nav-pills">
                 {alignLinkItems.map((linkItem, i) => <LinkItemGenerator key={"align-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === alignValue} onClick={() => setAlignValue(linkItem.linkText)} />)}
             </ul>
-            <Row justify={justifyValue} align={alignValue} debug>{children}</Row>
+            <Row style={{ height: "300px" }} justify={justifyValue} align={alignValue} debug>{children}</Row>
         </Container>
     );
 };
