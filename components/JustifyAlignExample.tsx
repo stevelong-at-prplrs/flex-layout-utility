@@ -122,7 +122,7 @@ const JustifyAlignExample = () => {
             <Row justify="center" style={{ backgroundColor: "lightGray" }}>
                 <Col xs={6}>
                     <br />
-                    <pre>{`<Row\n\tjustify={${justifyValue}}\n\talign={${alignValue}}\n\tstyle={{ flexDirection: "${flexDirection}" }} >\n\t{...children}\n</Row>`}</pre>
+                    <pre>{`<Row\n\tjustify="${justifyValue}"\n\talign="${alignValue}"\n\tstyle={{ flexDirection: "${flexDirection}" }} >\n\t{...children}\n</Row>`}</pre>
                 </Col>
             </Row>
         </Container>
