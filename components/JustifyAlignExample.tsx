@@ -89,37 +89,42 @@ const JustifyAlignExample = () => {
 
     return (
         <Container fluid>
-            <Container>
-                <Row>
-                    <Col>
-                        <Row style={{ flexDirection: "column" }}>
-                            <h5>justify={justifyValue}</h5>
-                            <ul className="nav nav-pills">
-                                {justifyLinkItems.map((linkItem, i) => <LinkItemGenerator key={"justify-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === justifyValue} onClick={() => setJustifyValue(linkItem.linkText)} />)}
-                            </ul>
-                        </Row>
-                        <hr />
-                        <Row style={{ flexDirection: "column" }}>
-                            <h5>align={alignValue}</h5>
-                            <ul className="nav nav-pills">
-                                {alignLinkItems.map((linkItem, i) => <LinkItemGenerator key={"align-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === alignValue} onClick={() => setAlignValue(linkItem.linkText)} />)}
-                            </ul>
-                        </Row>
-                        <hr />
-                        <Row style={{ flexDirection: "column" }}>
-                            <h5>Flex Direction</h5>
-                            <ul className="nav nav-pills">
-                                {flexDirectionLinkItems.map((linkItem, i) => <LinkItemGenerator key={"flexdirection-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === flexDirection} onClick={() => setFlexDirection(linkItem.linkText)} />)}
-                            </ul>
-                        </Row>
-                        <hr />
-                    </Col>
-                </Row>
-            </Container>
-
+            <Row justify="center">
+                <Col xs={10}>
+                    <Row style={{ flexDirection: "column" }}>
+                        <h5>justify={justifyValue}</h5>
+                        <ul className="nav nav-pills">
+                            {justifyLinkItems.map((linkItem, i) => <LinkItemGenerator key={"justify-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === justifyValue} onClick={() => setJustifyValue(linkItem.linkText)} />)}
+                        </ul>
+                    </Row>
+                    <hr />
+                    <Row style={{ flexDirection: "column" }}>
+                        <h5>align={alignValue}</h5>
+                        <ul className="nav nav-pills">
+                            {alignLinkItems.map((linkItem, i) => <LinkItemGenerator key={"align-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === alignValue} onClick={() => setAlignValue(linkItem.linkText)} />)}
+                        </ul>
+                    </Row>
+                    <hr />
+                    <Row style={{ flexDirection: "column" }}>
+                        <h5>Flex Direction</h5>
+                        <ul className="nav nav-pills">
+                            {flexDirectionLinkItems.map((linkItem, i) => <LinkItemGenerator key={"flexdirection-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === flexDirection} onClick={() => setFlexDirection(linkItem.linkText)} />)}
+                        </ul>
+                    </Row>
+                    <hr />
+                </Col>
+            </Row>
+            <br />
             <Row style={{ height: "300px", flexDirection: flexDirection }} justify={justifyValue} align={alignValue} debug>{children}</Row>
-
-            <pre>{`<Row\n\tjustify={${justifyValue}}\n\talign={${alignValue}}\n\tstyle={{ flexDirection: "${flexDirection}" }} >\n\t{...children}\n</Row>`}</pre>
+            <br />
+            <hr />
+            <br />
+            <Row justify="center" style={{ backgroundColor: "lightGray" }}>
+                <Col xs={6}>
+                    <br />
+                    <pre>{`<Row\n\tjustify={${justifyValue}}\n\talign={${alignValue}}\n\tstyle={{ flexDirection: "${flexDirection}" }} >\n\t{...children}\n</Row>`}</pre>
+                </Col>
+            </Row>
         </Container>
     );
 };

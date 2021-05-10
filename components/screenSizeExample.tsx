@@ -42,6 +42,7 @@ const ScreenSizeExample = () => {
                 <Visible xxl><div style={{ color: 'green' }}>Visible on xx-large</div></Visible>
             </Col>
         </Row>
+        <br />
     </Container>);
 };
 

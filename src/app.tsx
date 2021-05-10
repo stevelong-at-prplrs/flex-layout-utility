@@ -34,8 +34,11 @@ export function App(): JSX.Element {
                 </div> */}
             </div>
             <div className="container">
+                <br />
                 <JustifyAlignExample />
+                <br />
                 <ScreenSizeExample />
+                <br />
             </div>
         </React.Fragment>
     );
