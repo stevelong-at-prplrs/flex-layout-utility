@@ -109,7 +109,7 @@ const JustifyAlignExample = () => {
                         <Row style={{ flexDirection: "column" }}>
                             <h5>Flex Direction</h5>
                             <ul className="nav nav-pills">
-                                {flexDirectionLinkItems.map((linkItem, i) => <LinkItemGenerator key={"justify-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === flexDirection} onClick={() => setFlexDirection(linkItem.linkText)} />)}
+                                {flexDirectionLinkItems.map((linkItem, i) => <LinkItemGenerator key={"flexdirection-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === flexDirection} onClick={() => setFlexDirection(linkItem.linkText)} />)}
                             </ul>
                         </Row>
                         <hr />
