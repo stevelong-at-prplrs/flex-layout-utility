@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Container, Row, Col } from 'react-grid-system'; // RowProps
+import FlexRow from "./FlexRow";
 
 const children = <>
     <Col xs={3} debug>1 of 3</Col>
@@ -115,7 +116,7 @@ const JustifyAlignExample = () => {
                 </Col>
             </Row>
             <br />
-            <Row style={{ height: "300px", flexDirection: flexDirection }} justify={justifyValue} align={alignValue} debug>{children}</Row>
+            <FlexRow style={{ height: "300px" }} direction={flexDirection} justify={justifyValue} align={alignValue} debug>{children}</FlexRow>
             <br />
             <hr />
             <br />
