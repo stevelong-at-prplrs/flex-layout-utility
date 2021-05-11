@@ -7,9 +7,9 @@ const children = <>
     <Col xs={3} debug>3 of 3</Col>
 </>;
 
-type Justify = "start" | "center" | "end" | "between" | "around" | "initial" | "inherit";
-type Align = "start" | "center" | "end" | "normal" | "stretch"
-type FlexDirection = "column" | "row" | "column-reverse" | "row-reverse";
+export type Justify = "start" | "center" | "end" | "between" | "around" | "initial" | "inherit";
+export type Align = "start" | "center" | "end" | "normal" | "stretch"
+export type FlexDirection = "column" | "row" | "column-reverse" | "row-reverse";
 
 interface ILinkItem<T extends string> {
     linkText: T;
