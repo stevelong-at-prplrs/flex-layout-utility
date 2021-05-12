@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Container, Row, Col } from 'react-grid-system'; // RowProps
+import { Container, Row, Col, Justify, Align } from 'react-grid-system';
 import FlexRow from "./FlexRow";
 
 const children = <>
@@ -8,8 +8,6 @@ const children = <>
     <Col xs={3} debug>3 of 3</Col>
 </>;
 
-export type Justify = "start" | "center" | "end" | "between" | "around" | "initial" | "inherit";
-export type Align = "start" | "center" | "end" | "normal" | "stretch"
 export type FlexDirection = "column" | "row" | "column-reverse" | "row-reverse";
 
 interface ILinkItem<T extends string> {
@@ -123,7 +121,24 @@ const JustifyAlignExample = () => {
             <Row justify="center" style={{ backgroundColor: "lightGray" }}>
                 <Col xs={6}>
                     <br />
-                    <pre>{`<Row\n\tjustify="${justifyValue}"\n\talign="${alignValue}"\n\tstyle={{ flexDirection: "${flexDirection}" }} >\n\t{...children}\n</Row>`}</pre>
+                    <pre>{`
+import * as React from "react";
+import { Justify, Align } from 'react-grid-system';
+import FlexRow, { FlexRowProps } from "./FlexRow";
+
+const FlexRowExample = (props: FlexRowProps) => {
+
+    const { justify, align, direction } = props;
+
+    <FlexRow
+        justify="${justifyValue}"
+        align="${alignValue}"
+        direction="${flexDirection}">
+            {children}
+    </FlexRow>
+};
+                        `}
+                    </pre>
                 </Col>
             </Row>
         </Container>

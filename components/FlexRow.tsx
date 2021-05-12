@@ -1,39 +1,18 @@
 import * as React from 'react';
-import { Row } from 'react-grid-system';
-import { Align, FlexDirection, Justify } from "./JustifyAlignExample";
+import { Row, RowProps } from 'react-grid-system';
+import { FlexDirection } from "./JustifyAlignExample";
 
-interface IRowProps {
-    align?: Align;
-    justify?: Justify;
-    debug?: boolean;
-    style?: object;
-    nogutter?: boolean;
-    nowrap?: boolean;
-    component?: (() => string) | string;
-    gutterWidth?: number;
-    children?: React.ReactNode;
-}
-
-interface IFlexRowProps extends IRowProps {
+type FlexRowProps = RowProps & {
     direction?: FlexDirection;
+    ref?: (instance: Row) => void; // Prevents error: "No overload matches this call. Types of property 'ref' are incompatible." 
 }
 
-const FlexRow = (props: IFlexRowProps): JSX.Element => {
+const FlexRow = (props: FlexRowProps): JSX.Element => {
 
-    const rowProps: IRowProps = Object.fromEntries([
-        ["align", props.align],
-        ["justify", props.justify],
-        ["debug", props.debug],
-        ["nogutter", props.nogutter],
-        ["nowrap", props.nowrap],
-        ["component", props.component],
-        ["gutterWidth", props.gutterWidth],
-        ["children", props.children]
-
-    ]);
+    const { direction, style } = props;
 
     return (
-        <Row {...rowProps} style={(props.direction ? { flexDirection: props.direction, ...props.style } : { ...props.style })} />
+        <Row {...props} style={{...style, flexDirection: direction}} />
     );
 };
 
