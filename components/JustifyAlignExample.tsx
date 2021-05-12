@@ -123,17 +123,18 @@ const JustifyAlignExample = () => {
                     <br />
                     <pre>{`
 import * as React from "react";
-import { Justify, Align } from 'react-grid-system';
+import { Justify, Align } from "react-grid-system";
 import FlexRow, { FlexRowProps } from "./FlexRow";
 
-const FlexRowExample = (props: FlexRowProps) => {
+const FlexRowExample = () => {
 
-    const { justify, align, direction } = props;
+    const props: FlexRowProps = {
+        justify: "${justifyValue}",
+        align: "${alignValue}",
+        direction: "${flexDirection}" 
+    };
 
-    <FlexRow
-        justify="${justifyValue}"
-        align="${alignValue}"
-        direction="${flexDirection}">
+    <FlexRow {...props} >
             {children}
     </FlexRow>
 };

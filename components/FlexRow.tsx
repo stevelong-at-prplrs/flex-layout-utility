@@ -1,16 +1,20 @@
 import * as React from 'react';
 import { Row, RowProps } from 'react-grid-system';
-import { FlexDirection } from "./JustifyAlignExample";
 
-type FlexRowProps = RowProps & {
+/**
+ * FlexRow is a React component which wraps the React Grid System Row component.
+ * 
+ * The optional prop 'ref' was added to FlexRowProps simply in order to avoid an issue with the type defn of type RowProps.
+ */
+
+export type FlexDirection = "column" | "row" | "column-reverse" | "row-reverse";
+export type FlexRowProps = RowProps & {
     direction?: FlexDirection;
-    ref?: (instance: Row) => void; // Prevents error: "No overload matches this call. Types of property 'ref' are incompatible." 
+    ref?: (instance: Row) => void; // Prevents error: "No overload matches this call-- types of property 'ref' are incompatible." 
 }
 
 const FlexRow = (props: FlexRowProps): JSX.Element => {
-
     const { direction, style } = props;
-
     return (
         <Row {...props} style={{...style, flexDirection: direction}} />
     );
