@@ -7,11 +7,12 @@ const children = <>
     <div className="flex-child box-3">3 of 3</div>
 </>;
 
-type Align = 'normal' | 'start' | 'center' | 'end' | 'stretch'
+type Align = 'normal' | 'start' | 'center' | 'end' | 'stretch';
 type Justify = 'start' | 'center' | 'end' | 'between' | 'around' | 'initial' | 'inherit';
 type Direction = "column" | "row" | "column-reverse" | "row-reverse";
-// align-items: stretch|center|flex-start|flex-end|baseline|initial|inherit;
-// justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly
+
+type AlignItems = "stretch"|"center"|"flex-start"|"flex-end"|"baseline"|"initial"|"inherit";
+type JustifyContent = "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly"
 
 
 
@@ -147,6 +148,20 @@ const JustifyAlignExample = () => {
                         <div className="box-3">3 of 3</div>
                     </div>`}</pre>
                 </div>
+            </div>
+            <div>
+            <div className="form-check">
+  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+  <label className="form-check-label" htmlFor="flexRadioDefault1">
+    Default radio
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
+  <label className="form-check-label" htmlFor="flexRadioDefault2">
+    Default checked radio
+  </label>
+</div>
             </div>
         </Container>
     );
