@@ -1,5 +1,4 @@
 import * as React from "react";
-import ScreenSizeExample from "../components/screenSizeExample";
 import JustifyAlignExample from "../components/JustifyAlignExample";
 
 export function App(): JSX.Element {
@@ -29,8 +28,6 @@ export function App(): JSX.Element {
             <div className="container">
                 <br />
                 <JustifyAlignExample />
-                <br />
-                <ScreenSizeExample />
                 <br />
             </div>
         </React.Fragment>

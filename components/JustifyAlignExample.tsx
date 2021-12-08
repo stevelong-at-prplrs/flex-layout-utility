@@ -3,17 +3,22 @@ import { Container, Row, Col, Justify, Align } from 'react-grid-system';
 import FlexRow from "./FlexRow";
 
 const children = <>
-    <Col xs={3} debug>1 of 3</Col>
-    <Col xs={3} debug>2 of 3</Col>
-    <Col xs={3} debug>3 of 3</Col>
+    <div className="flex-child">1 of 3</div>
+    <div className="flex-child">2 of 3</div>
+    <div className="flex-child">3 of 3</div>
 </>;
 
 export type FlexDirection = "column" | "row" | "column-reverse" | "row-reverse";
+// align-items: stretch|center|flex-start|flex-end|baseline|initial|inherit;
+// justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly
+
+
 
 interface ILinkItem<T extends string> {
     linkText: T;
     active?: boolean;
     onClick?: () => void;
+    propVal?: string;
 }
 
 const LinkItemGenerator = (props: ILinkItem<Justify | Align | FlexDirection>) =>
@@ -28,36 +33,48 @@ const LinkItemGenerator = (props: ILinkItem<Justify | Align | FlexDirection>) =>
 const justifyLinkItems: ILinkItem<Justify>[] = [
     {
         linkText: "start",
+        propVal: "flex-start"
     },
     {
         linkText: "center"
     },
     {
-        linkText: "end"
+        linkText: "end",
+        propVal: "flex-end"
     },
     {
-        linkText: "between"
+        linkText: "between",
+        propVal: "space-between"
     },
     {
-        linkText: "around"
+        linkText: "around",
+        propVal: "space-around"
     },
-    {
-        linkText: "initial"
-    },
-    {
-        linkText: "inherit"
-    },
+    // {
+    //     linkText: "evenly",
+    //     propVal: "space-evenly"
+    // },
+    // {
+    //     linkText: "initial"
+    // },
+    // {
+    //     linkText: "inherit"
+    // },
 ];
+
 
 const alignLinkItems: ILinkItem<Align>[] = [
     {
-        linkText: "start"
+        linkText: "start",
+        propVal: "flex-start"
+
     },
     {
         linkText: "center"
     },
     {
-        linkText: "end"
+        linkText: "end",
+        propVal: "flex-end"
     },
     {
         linkText: "normal"
@@ -82,7 +99,9 @@ const flexDirectionLinkItems: ILinkItem<FlexDirection>[] = [
 const JustifyAlignExample = () => {
 
     const [justifyValue, setJustifyValue] = React.useState("center" as Justify);
+    const [justifyValue2, setJustifyValue2] = React.useState("center");
     const [alignValue, setAlignValue] = React.useState("center" as Align);
+    const [alignValue2, setAlignValue2] = React.useState("center");
     const [flexDirection, setFlexDirection] = React.useState("row" as FlexDirection);
 
 
@@ -93,14 +112,14 @@ const JustifyAlignExample = () => {
                     <Row style={{ flexDirection: "column" }}>
                         <h5>justify={justifyValue}</h5>
                         <ul className="nav nav-pills">
-                            {justifyLinkItems.map((linkItem, i) => <LinkItemGenerator key={"justify-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === justifyValue} onClick={() => setJustifyValue(linkItem.linkText)} />)}
+                            {justifyLinkItems.map((linkItem, i) => <LinkItemGenerator key={"justify-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === justifyValue} onClick={() => { setJustifyValue(linkItem.linkText); setJustifyValue2(linkItem.propVal || linkItem.linkText); }} />)}
                         </ul>
                     </Row>
                     <hr />
                     <Row style={{ flexDirection: "column" }}>
                         <h5>align={alignValue}</h5>
                         <ul className="nav nav-pills">
-                            {alignLinkItems.map((linkItem, i) => <LinkItemGenerator key={"align-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === alignValue} onClick={() => setAlignValue(linkItem.linkText)} />)}
+                            {alignLinkItems.map((linkItem, i) => <LinkItemGenerator key={"align-navpill-" + i} linkText={linkItem.linkText} active={linkItem.linkText === alignValue} onClick={() => { setAlignValue(linkItem.linkText); setAlignValue2(linkItem.propVal || linkItem.linkText)}} />)}
                         </ul>
                     </Row>
                     <hr />
@@ -114,34 +133,25 @@ const JustifyAlignExample = () => {
                 </Col>
             </Row>
             <br />
-            <FlexRow style={{ height: "300px" }} direction={flexDirection} justify={justifyValue} align={alignValue} debug>{children}</FlexRow>
+            {/* <FlexRow style={{ height: "300px" }} direction={flexDirection} justify={justifyValue} align={alignValue} debug>{children}</FlexRow> */}
+            <div className="flex-container" style={{ height: "300px", flexDirection: flexDirection, justifyContent: justifyValue2, alignItems: alignValue2 }} >{children}</div>
             <br />
             <hr />
             <br />
-            <Row justify="center" style={{ backgroundColor: "lightGray" }}>
-                <Col xs={6}>
-                    <br />
+            <div style={{ backgroundColor: "lightGray" }}>
+                <div>
                     <pre>{`
-import * as React from "react";
-import { Justify, Align } from "react-grid-system";
-import FlexRow, { FlexRowProps } from "./FlexRow";
-
-const FlexRowExample = () => {
-
-    const props: FlexRowProps = {
-        justify: "${justifyValue}",
-        align: "${alignValue}",
-        direction: "${flexDirection}" 
-    };
-
-    <FlexRow {...props} >
-            {children}
-    </FlexRow>
-};
-                        `}
-                    </pre>
-                </Col>
-            </Row>
+                    <div
+                        className="flex-container"
+                        style={{
+                            height: "300px",
+                            flexDirection: ${flexDirection},
+                            justifyContent: ${justifyValue2},
+                            alignItems: ${alignValue2} }} >
+                        {children}
+                    </div>`}</pre>
+                </div>
+            </div>
         </Container>
     );
 };
