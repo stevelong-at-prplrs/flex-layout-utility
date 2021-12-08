@@ -1,5 +1,5 @@
 import * as React from "react";
-import JustifyAlignExample from "../components/JustifyAlignExample";
+import FlexLayoutUtility from "../components/FlexLayoutUtility";
 
 export function App(): JSX.Element {
 
@@ -27,7 +27,7 @@ export function App(): JSX.Element {
             </div>
             <div className="container">
                 <br />
-                <JustifyAlignExample />
+                <FlexLayoutUtility />
                 <br />
             </div>
         </React.Fragment>
