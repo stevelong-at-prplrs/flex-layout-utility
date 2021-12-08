@@ -21,9 +21,9 @@ export function App(): JSX.Element {
     return (
 
         <React.Fragment>
-            <div className="container-fluid" style={{ backgroundColor: "#0062cc", color: "white", padding: "1rem", marginBottom: "1rem" }}>
+            <div className="container-fluid" style={{ backgroundColor: "#7c3392", color: "white", padding: "1rem", marginBottom: "1rem" }}>
                 {/* <h1>{hash.length > 1 ? hash.slice(1) : "#"}</h1> */}
-                <h3><pre style={{ color: 'white', marginBottom: 0 }}>{`<FlexRow {...props} />`}</pre></h3>
+                <h3><pre style={{ color: 'white', marginBottom: 0 }}>{`Flex layout utility`}</pre></h3>
             </div>
             <div className="container">
                 <br />
