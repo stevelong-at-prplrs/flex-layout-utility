@@ -83,14 +83,14 @@ const RadioButtonGenerator = (props) =>
             type="radio"
             name={props.propkey + props.linkText}
             id={props.propkey + props.linkText}
-            onChange={() => props.updateSelection(props.linkText)}
-            checked={props.linkText === props.active} />
+            onChange={props.onChange}
+            checked={props.checked} />
         <label className="form-check-label" htmlFor={props.propkey + props.linkText}>
             {props.linkText}
         </label>
     </div>;
 
-const FlexLayoutUtility = () => {
+const FlexLayoutUtility = () => { // abstract these controls using useMemo()
 
     const [justifyValue, setJustifyValue] = React.useState("center" as JustifyContent);
     const [alignValue, setAlignValue] = React.useState("center" as AlignItems);
@@ -102,15 +102,15 @@ const FlexLayoutUtility = () => {
             <Row justify="center">
                 <Col>
                     <h5>justify-content</h5>
-                    {justifyContentLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"justifyRadioButton" + ind} propkey={"justifyRadioButton" + ind} linkText={linkItem.linkText} active={justifyValue} updateSelection={setJustifyValue} />)}
+                    {justifyContentLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"justifyRadioButton" + ind} propkey={"justifyRadioButton" + ind} linkText={linkItem.linkText} checked={justifyValue === linkItem.linkText} onChange={() => setJustifyValue(linkItem.linkText)} />)}
                 </Col>
                 <Col>
                     <h5>align-items</h5>
-                    {alignItemsLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"alignRadioButton" + ind} propkey={"alignRadioButton" + ind} linkText={linkItem.linkText} active={alignValue} updateSelection={setAlignValue} />)}
+                    {alignItemsLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"alignRadioButton" + ind} propkey={"alignRadioButton" + ind} linkText={linkItem.linkText} checked={alignValue === linkItem.linkText} onChange={() => setAlignValue(linkItem.linkText)} />)}
                 </Col>
                 <Col>
                     <h5>flex-direction</h5>
-                    {flexDirectionLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"flexRadioButton" + ind} propkey={"flexRadioButton" + ind} linkText={linkItem.linkText} active={flexDirection} updateSelection={setFlexDirection} />)}
+                    {flexDirectionLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"flexRadioButton" + ind} propkey={"flexRadioButton" + ind} linkText={linkItem.linkText} checked={flexDirection === linkItem.linkText} onChange={() => setFlexDirection(linkItem.linkText)} />)}
                 </Col>
             </Row>
             <br />
