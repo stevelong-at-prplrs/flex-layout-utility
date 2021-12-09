@@ -24,19 +24,19 @@ const justifyContentLinkItems: ILinkItem<JustifyContent>[] = [
         linkText: "flex-start"
     },
     {
-        linkText: "flex-end"
-    },
-    {
         linkText: "center"
     },
     {
-        linkText: "space-between"
+        linkText: "flex-end"
+    },
+    {
+        linkText: "space-evenly"
     },
     {
         linkText: "space-around"
     },
     {
-        linkText: "space-evenly"
+        linkText: "space-between"
     },
 ]
 
@@ -45,10 +45,10 @@ const alignItemsLinkItems: ILinkItem<AlignItems>[] = [
         linkText: "flex-start"
     },
     {
-        linkText: "flex-end"
+        linkText: "center"
     },
     {
-        linkText: "center"
+        linkText: "flex-end"
     },
     {
         linkText: "stretch"
@@ -68,9 +68,9 @@ const flexDirectionLinkItems: ILinkItem<FlexDirection>[] = [
     {
         linkText: "row"
     }, {
-        linkText: "row-reverse"
-    }, {
         linkText: "column"
+    }, {
+        linkText: "row-reverse"
     }, {
         linkText: "column-reverse"
     },
@@ -90,16 +90,40 @@ const RadioButtonGenerator = (props) =>
         </label>
     </div>;
 
+const copyToClipBoard = async (txtToCopy: string): Promise<void> => {
+    if (navigator.clipboard) {
+        try {
+            await navigator.clipboard.writeText(txtToCopy);
+            alert("Copied to clipboard.")
+        } catch (err) {
+            alert("Failed to copy.")
+        }
+    } else alert("not supported in your browser")
+  };
+
 const FlexLayoutUtility = () => { // abstract these controls using useMemo()
 
     const [justifyValue, setJustifyValue] = React.useState("center" as JustifyContent);
     const [alignValue, setAlignValue] = React.useState("center" as AlignItems);
     const [flexDirection, setFlexDirection] = React.useState("row" as FlexDirection);
 
+    const copyButtonRef: React.LegacyRef<HTMLButtonElement> = React.useRef()
+
+    const codeSample =
+`<div style="display: flex; flex-direction: ${flexDirection}; justify-content: ${justifyValue}; align-items: ${alignValue};">
+    <div className="box-1">1 of 3</div>
+    <div className="box-2">2 of 3</div>
+    <div className="box-3">3 of 3</div>
+</div>`;
+
 
     return (
         <Container fluid>
             <Row justify="center">
+                <Col>
+                    <h5>flex-direction</h5>
+                    {flexDirectionLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"flexRadioButton" + ind} propkey={"flexRadioButton" + ind} linkText={linkItem.linkText} checked={flexDirection === linkItem.linkText} onChange={() => setFlexDirection(linkItem.linkText)} />)}
+                </Col>
                 <Col>
                     <h5>justify-content</h5>
                     {justifyContentLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"justifyRadioButton" + ind} propkey={"justifyRadioButton" + ind} linkText={linkItem.linkText} checked={justifyValue === linkItem.linkText} onChange={() => setJustifyValue(linkItem.linkText)} />)}
@@ -108,22 +132,15 @@ const FlexLayoutUtility = () => { // abstract these controls using useMemo()
                     <h5>align-items</h5>
                     {alignItemsLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"alignRadioButton" + ind} propkey={"alignRadioButton" + ind} linkText={linkItem.linkText} checked={alignValue === linkItem.linkText} onChange={() => setAlignValue(linkItem.linkText)} />)}
                 </Col>
-                <Col>
-                    <h5>flex-direction</h5>
-                    {flexDirectionLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"flexRadioButton" + ind} propkey={"flexRadioButton" + ind} linkText={linkItem.linkText} checked={flexDirection === linkItem.linkText} onChange={() => setFlexDirection(linkItem.linkText)} />)}
-                </Col>
             </Row>
             <br />
             <div className={"background"} style={{ display: "flex", height: "600px", flexDirection: flexDirection, justifyContent: justifyValue, alignItems: alignValue }} >{children}</div>
             <br />
             <div style={{ backgroundColor: "lightGray" }}>
-                <div>
-                    <pre>{`
-                    <div style="display: flex; flex-direction: ${flexDirection}; justify-content: ${justifyValue}; align-items: ${alignValue};">
-                        <div className="box-1">1 of 3</div>
-                        <div className="box-2">2 of 3</div>
-                        <div className="box-3">3 of 3</div>
-                    </div>`}</pre>
+                <div style={{ position: "relative" }}>
+                    <pre style={{ padding: "1.5rem" }}>{codeSample}
+                        {navigator.clipboard ? <button ref={copyButtonRef} onFocus={() => { if (copyButtonRef?.current) copyButtonRef.current.blur()}} onClick={() => copyToClipBoard(codeSample)} style={{ position: "absolute", right: 0, bottom: 0, border: "none" }}>Copy</button> : ""}
+                    </pre>
                 </div>
             </div>
             <div>
