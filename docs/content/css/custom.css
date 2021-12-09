@@ -1,7 +1,9 @@
 .flex-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     margin: 5px;
-    padding-top: 5px;
     border-radius: 5px;
     background-color: lightgray;
 }

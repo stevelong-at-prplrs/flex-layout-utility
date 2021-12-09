@@ -17,51 +17,43 @@ interface ILinkItem<T extends string> {
     active?: boolean;
     onClick?: () => void;
     propVal?: string;
+    disabled?: boolean;
 }
 
 const justifyContentLinkItems: ILinkItem<JustifyContent>[] = [
     {
         linkText: "flex-start"
-    },
-    {
+    }, {
         linkText: "center"
-    },
-    {
+    }, {
         linkText: "flex-end"
-    },
-    {
+    }, {
         linkText: "space-evenly"
-    },
-    {
+    }, {
         linkText: "space-around"
-    },
-    {
+    }, {
         linkText: "space-between"
-    },
+    }
 ]
 
 const alignItemsLinkItems: ILinkItem<AlignItems>[] = [
     {
         linkText: "flex-start"
-    },
-    {
+    }, {
         linkText: "center"
-    },
-    {
+    }, {
         linkText: "flex-end"
-    },
-    {
+    }, {
         linkText: "stretch"
-    },
-    // { // commenting these out for now becasue they might be confusing and doesn't add utility to the... utility.
-    //     linkText: "baseline"
-    // },
-    // {
-    //     linkText: "initial"
-    // },
-    // {
-    //     linkText: "inherit"
-    // },
+    }, {
+        linkText: "baseline"
+    }, {
+        linkText: "initial",
+        disabled: true
+    }, {
+        linkText: "inherit",
+        disabled: true
+    }
 ]
 
 const flexDirectionLinkItems: ILinkItem<FlexDirection>[] = [
@@ -76,9 +68,21 @@ const flexDirectionLinkItems: ILinkItem<FlexDirection>[] = [
     },
 ];
 
+const copyToClipBoard = async (txtToCopy: string): Promise<void> => {
+    if (navigator.clipboard) {
+        try {
+            await navigator.clipboard.writeText(txtToCopy);
+            alert("Copied to clipboard.")
+        } catch (err) {
+            alert("Failed to copy to clipboard.")
+        }
+    } else alert("Copy to clipboard not supported in your browser")
+  };
+
 const RadioButtonGenerator = (props) =>
     <div className="form-check">
         <input
+            disabled={props.disabled}
             className="form-check-input"
             type="radio"
             name={props.propkey + props.linkText}
@@ -90,25 +94,20 @@ const RadioButtonGenerator = (props) =>
         </label>
     </div>;
 
-const copyToClipBoard = async (txtToCopy: string): Promise<void> => {
-    if (navigator.clipboard) {
-        try {
-            await navigator.clipboard.writeText(txtToCopy);
-            alert("Copied to clipboard.")
-        } catch (err) {
-            alert("Failed to copy.")
-        }
-    } else alert("not supported in your browser")
-  };
-
-const FlexLayoutUtility = () => { // abstract these controls using useMemo()
-
+  const ControlColumn = (props) =>
+    <Col>
+        <h5>{props.name}</h5>
+        {props.linkItemArr.map((linkItem, ind) => <RadioButtonGenerator key={props.name + ind} propkey={props.name + ind} linkText={linkItem.linkText} checked={props.currentSelection === linkItem.linkText} onChange={() => props.setSelection(linkItem.linkText)} disabled={linkItem.disabled} />)}
+    </Col>
+  
+  const FlexLayoutUtility = () => {
+      
+    const [flexDirection, setFlexDirection] = React.useState("row" as FlexDirection);
     const [justifyValue, setJustifyValue] = React.useState("center" as JustifyContent);
     const [alignValue, setAlignValue] = React.useState("center" as AlignItems);
-    const [flexDirection, setFlexDirection] = React.useState("row" as FlexDirection);
-
     const copyButtonRef: React.LegacyRef<HTMLButtonElement> = React.useRef()
-
+      
+    
     const codeSample =
 `<div style="display: flex; flex-direction: ${flexDirection}; justify-content: ${justifyValue}; align-items: ${alignValue};">
     <div className="box-1">1 of 3</div>
@@ -116,22 +115,30 @@ const FlexLayoutUtility = () => { // abstract these controls using useMemo()
     <div className="box-3">3 of 3</div>
 </div>`;
 
+    const columnData = [
+        {
+            name: "flex-direction",
+            linkItemArr: flexDirectionLinkItems,
+            currentSelection: flexDirection,
+            setSelection: setFlexDirection
+        }, {
+            name: "justify-content",
+            linkItemArr: justifyContentLinkItems,
+            currentSelection: justifyValue,
+            setSelection: setJustifyValue
+        }, {
+            name: "align-items",
+            linkItemArr: alignItemsLinkItems,
+            currentSelection: alignValue,
+            setSelection: setAlignValue
+        }
+    ];
+
 
     return (
         <Container fluid>
             <Row justify="center">
-                <Col>
-                    <h5>flex-direction</h5>
-                    {flexDirectionLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"flexRadioButton" + ind} propkey={"flexRadioButton" + ind} linkText={linkItem.linkText} checked={flexDirection === linkItem.linkText} onChange={() => setFlexDirection(linkItem.linkText)} />)}
-                </Col>
-                <Col>
-                    <h5>justify-content</h5>
-                    {justifyContentLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"justifyRadioButton" + ind} propkey={"justifyRadioButton" + ind} linkText={linkItem.linkText} checked={justifyValue === linkItem.linkText} onChange={() => setJustifyValue(linkItem.linkText)} />)}
-                </Col>
-                <Col>
-                    <h5>align-items</h5>
-                    {alignItemsLinkItems.map((linkItem, ind) => <RadioButtonGenerator key={"alignRadioButton" + ind} propkey={"alignRadioButton" + ind} linkText={linkItem.linkText} checked={alignValue === linkItem.linkText} onChange={() => setAlignValue(linkItem.linkText)} />)}
-                </Col>
+                {columnData.map((propsObj, index) => <ControlColumn key={"control-column" + index} {...propsObj} />)}
             </Row>
             <br />
             <div className={"background"} style={{ display: "flex", height: "600px", flexDirection: flexDirection, justifyContent: justifyValue, alignItems: alignValue }} >{children}</div>
