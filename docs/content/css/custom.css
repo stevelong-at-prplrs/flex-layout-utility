@@ -1,0 +1,30 @@
+.flex-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: lightgray;
+}
+
+.box-1 {
+    min-height: 100px;
+    min-width: 200px;
+}
+.box-2 {
+    min-height: 150px;
+    min-width: 150px;
+}
+.box-3 {
+    min-height: 200px;
+    min-width: 100px;
+}
+
+.background {
+    background: url(svg-backgrnd.svg);
+}
+
+.nav-link.active {
+    background-color: #7c3392!important;
+}

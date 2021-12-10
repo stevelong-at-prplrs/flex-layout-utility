@@ -1,8 +1,8 @@
 {
-  "name": "rgs-interactive-layout",
+  "name": "flex-layout-utility",
   "version": "1.0.0",
-  "description": "An interactive utility for using react grid system layouts in UIs.",
-  "browser": "dist/index.html",
+  "description": "An interactive CSS generator for Flexbox layouts.",
+  "browser": "docs/index.html",
   "scripts": {
     "serve": "serve docs",
     "webpack-watch": "webpack --config webpack-config.js",
@@ -11,14 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stevelong-at-prplrs/rgs-interactive-layout.git"
+    "url": "git+https://github.com/stevelong-at-prplrs/flex-layout-utility.git"
   },
   "author": "Steve Long",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/stevelong-at-prplrs/rgs-interactive-layout/issues"
-  },
-  "homepage": "https://github.com/stevelong-at-prplrs/rgs-interactive-layout#readme",
   "dependencies": {
     "concurrently": "^6.1.0",
     "react": "^16.13.1",
