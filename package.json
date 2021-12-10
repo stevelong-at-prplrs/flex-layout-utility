@@ -13,6 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/stevelong-at-prplrs/flex-layout-utility.git"
   },
+  "homepage": "https://stevelong-at-prplrs.github.io/flex-layout-utility/",
   "author": "Steve Long",
   "license": "ISC",
   "dependencies": {
