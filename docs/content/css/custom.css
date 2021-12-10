@@ -1,11 +1,29 @@
+.flex-parent {
+    display: flex;
+    height: 600px;
+    background: url(svg-backgrnd.svg);
+}
+
 .flex-child {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
     margin: 5px;
     border-radius: 5px;
     background-color: lightgray;
+}
+
+.copy-button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border: none;
+}
+
+.code-display {
+    padding: 1.5rem;
+    position: relative;
+    background-color: lightGray;
 }
 
 .box-1 {
@@ -19,12 +37,4 @@
 .box-3 {
     min-height: 200px;
     min-width: 100px;
-}
-
-.background {
-    background: url(svg-backgrnd.svg);
-}
-
-.nav-link.active {
-    background-color: #7c3392!important;
 }

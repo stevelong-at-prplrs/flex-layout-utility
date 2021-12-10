@@ -2,10 +2,10 @@ import * as React from "react";
 import { Container, Row, Col } from 'react-grid-system';
 
 type FlexDirection = "column" | "row" | "column-reverse" | "row-reverse";
-type AlignItems = "stretch"|"center"|"flex-start"|"flex-end"|"baseline"|"initial"|"inherit";
 type JustifyContent = "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly";
+type AlignItems = "stretch"|"center"|"flex-start"|"flex-end"|"baseline"|"initial"|"inherit";
 type ColumnName = "flex-direction" | "justify-content" | "align-items";
-type AllOptions = FlexDirection | AlignItems | JustifyContent
+type AllOptions = FlexDirection | JustifyContent | AlignItems;
 
 interface IFlexOption<T extends AllOptions> {
     cssValue: T;
@@ -25,11 +25,17 @@ interface IRadioButtonGenerator extends IFlexOption<AllOptions> {
     checked: boolean;
 }
 
-const children = <>
-    <div className="flex-child box-1">1 of 3</div>
-    <div className="flex-child box-2">2 of 3</div>
-    <div className="flex-child box-3">3 of 3</div>
-</>;
+const flexDirectionOptions: IFlexOption<FlexDirection>[] = [
+    {
+        cssValue: "row"
+    }, {
+        cssValue: "column"
+    }, {
+        cssValue: "row-reverse"
+    }, {
+        cssValue: "column-reverse"
+    },
+];
 
 const justifyContentOptions: IFlexOption<JustifyContent>[] = [
     {
@@ -67,18 +73,6 @@ const alignItemsOptions: IFlexOption<AlignItems>[] = [
     }
 ]
 
-const flexDirectionOptions: IFlexOption<FlexDirection>[] = [
-    {
-        cssValue: "row"
-    }, {
-        cssValue: "column"
-    }, {
-        cssValue: "row-reverse"
-    }, {
-        cssValue: "column-reverse"
-    },
-];
-
 const copyToClipBoard = async (txtToCopy: string): Promise<void> => {
     if (navigator.clipboard) {
         try {
@@ -90,7 +84,7 @@ const copyToClipBoard = async (txtToCopy: string): Promise<void> => {
     } else alert("Copy to clipboard not supported in your browser")
   };
 
-const RadioButtonGenerator = (props: IRadioButtonGenerator) =>
+const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
     <div className="form-check">
         <input
             disabled={props.disabled}
@@ -105,7 +99,7 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator) =>
         </label>
     </div>;
 
-  const ControlColumn = (props: IOptionColumnData) =>
+  const ControlColumn = (props: IOptionColumnData): JSX.Element =>
     <Col>
         <h5>{props.name}</h5>
         {props.flexOptionsArr.map((radioOption, ind) =>
@@ -116,15 +110,20 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator) =>
                 checked={props.currentSelection === radioOption.cssValue}
                 onChange={() => props.setSelection(radioOption.cssValue)}
                 disabled={radioOption.disabled} />)}
-    </Col>
+    </Col>;
   
-  const FlexLayoutUtility = () => {
+  const FlexLayoutUtility = (): JSX.Element => {
       
     const [flexDirection, setFlexDirection] = React.useState<FlexDirection>("row");
     const [justifyContent, setJustifyContent] = React.useState<JustifyContent>("center");
     const [alignItems, setAlignItems] = React.useState<AlignItems>("center");
-    const copyButtonRef: React.LegacyRef<HTMLButtonElement> = React.useRef()
+    const copyButtonRef: React.LegacyRef<HTMLButtonElement> = React.useRef();
       
+    const children = <>
+        <div className="flex-child box-1">1 of 3</div>
+        <div className="flex-child box-2">2 of 3</div>
+        <div className="flex-child box-3">3 of 3</div>
+    </>;
     
     const codeSample =
 `<div style="display: flex; flex-direction: ${flexDirection}; justify-content: ${justifyContent}; align-items: ${alignItems};">
@@ -158,10 +157,8 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator) =>
                 {columnData.map((propsObj, index) => <ControlColumn key={"control-column" + index} {...propsObj} />)}
             </Row>
             <br />
-            <div className={"background"}
+            <div className="flex-parent"
                 style={{
-                    display: "flex",
-                    height: "600px",
                     flexDirection,
                     justifyContent,
                     alignItems
@@ -169,23 +166,18 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator) =>
                 {children}
             </div>
             <br />
-            <div style={{ backgroundColor: "lightGray" }}>
-                <div style={{ position: "relative" }}>
-                    <pre style={{ padding: "1.5rem" }}>
-                        {codeSample}
-                        {navigator.clipboard ?
-                            <button
-                                ref={copyButtonRef}
-                                onFocus={() => {if (copyButtonRef?.current) copyButtonRef.current.blur()}}
-                                onClick={() => copyToClipBoard(codeSample)}
-                                style={{ position: "absolute", right: 0, bottom: 0, border: "none" }}>Copy
-                            </button>: ""}
-                    </pre>
-                </div>
-            </div>
-            <div>
-        </div>
-    </Container>
+            <pre className="code-display">
+                {codeSample}
+                {navigator.clipboard ?
+                    <button
+                        className="copy-button"
+                        ref={copyButtonRef}
+                        onFocus={() => {if (copyButtonRef?.current) copyButtonRef.current.blur()}}
+                        onClick={() => copyToClipBoard(codeSample)}>
+                            Copy
+                    </button>: ""}
+            </pre>
+        </Container>
     );
 };
 
