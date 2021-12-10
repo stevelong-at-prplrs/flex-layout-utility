@@ -1,5 +1,5 @@
 # flex-layout-utility
-Interactive CSS Generator for Flexbox
+[Interactive CSS Generator for Flexbox](https://stevelong-at-prplrs.github.io/flex-layout-utility/)
 
 To view this React + Typescript App, please follow these steps:
 
