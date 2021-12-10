@@ -1,15 +1,23 @@
 import * as React from "react";
 import { Container, Row, Col } from 'react-grid-system';
 
-type FlexDirection = "column" | "row" | "column-reverse" | "row-reverse";
-type JustifyContent = "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly";
-type AlignItems = "stretch"|"center"|"flex-start"|"flex-end"|"baseline"|"initial"|"inherit";
+// Types
+
+type FlexDirection = "row" | "column" | "row-reverse" | "column-reverse";
+type JustifyContent = "flex-start" | "center" | "flex-end" | "space-evenly" | "space-around" | "space-between";
+type AlignItems = "flex-start" | "center" | "flex-end" | "stretch" | "baseline" | "initial" | "inherit";
 type ColumnName = "flex-direction" | "justify-content" | "align-items";
 type AllOptions = FlexDirection | JustifyContent | AlignItems;
 
 interface IFlexOption<T extends AllOptions> {
     cssValue: T;
     disabled?: boolean;
+}
+
+interface IRadioButtonGenerator extends IFlexOption<AllOptions> {
+    propkey: string;
+    onChange: () => void;
+    checked: boolean;
 }
 
 interface IOptionColumnData {
@@ -19,11 +27,7 @@ interface IOptionColumnData {
     setSelection: React.Dispatch<React.SetStateAction<AllOptions>>;
 }
 
-interface IRadioButtonGenerator extends IFlexOption<AllOptions> {
-    propkey: string;
-    onChange: () => void;
-    checked: boolean;
-}
+// Data
 
 const flexDirectionOptions: IFlexOption<FlexDirection>[] = [
     {
@@ -72,6 +76,8 @@ const alignItemsOptions: IFlexOption<AlignItems>[] = [
         disabled: true
     }
 ]
+
+// functions
 
 const copyToClipBoard = async (txtToCopy: string): Promise<void> => {
     if (navigator.clipboard) {
