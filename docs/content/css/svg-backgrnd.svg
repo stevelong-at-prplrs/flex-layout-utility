@@ -1,11 +1,12 @@
-﻿<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='40' viewBox='0 0 60 60'>
+﻿<svg xmlns='http://www.w3.org/2000/svg'  width='60' height='60' viewBox='0 0 60 60'>
     <defs>
-        <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
+        <linearGradient id="graydient" x1="0" x2="0" y1="0" y2="1">
             <stop offset="0%" stop-color="#727272"/>
             <stop offset="30%" stop-color="#696969" stop-opacity="0"/>
             <stop offset="100%" stop-color="#505050"/>
         </linearGradient>
     </defs>
     <rect fill='#696969' width='60' height='60'/>
-    <ellipse cx="30" cy="30" rx="18" ry="12" fill-opacity='0.6' fill="url(#Gradient2)" />
+    <ellipse cx="15" cy="10" rx="15" ry="10" fill-opacity='0.6' fill="url(#graydient)" />
+    <ellipse cx="45" cy="40" rx="15" ry="10" fill-opacity='0.6' fill="url(#graydient)" />
 </svg>
