@@ -15,6 +15,10 @@
     height: 600px;
     background: url(svg-backgrnd.svg);
 }
+/* 
+.flex-parent :nth-child(1) { order: 2; }
+.flex-parent :nth-child(2) { order: 3; }
+.flex-parent :nth-child(3) { order: 1; } */
 
 .flex-child {
     display: flex;

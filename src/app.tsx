@@ -1,5 +1,5 @@
 import * as React from "react";
-import FlexLayoutUtility from "../components/FlexLayoutUtility";
+import NewLayoutUtility from "../components/NewLayoutUtility";
 
 export const App = (): JSX.Element => <>
             <div className="container-fluid title-bar">
@@ -7,7 +7,7 @@ export const App = (): JSX.Element => <>
             </div>
             <div className="container">
                 <br />
-                <FlexLayoutUtility />
+                <NewLayoutUtility />
                 <br />
             </div>
         </>;
