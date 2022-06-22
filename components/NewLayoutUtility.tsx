@@ -187,7 +187,7 @@ const NewLayoutUtility = (): JSX.Element => {
     const generatedChildren = childrenArr.sort((a, b) => a.sourceOrder - b.sourceOrder).map(child => <BoxGenerator {...child}/>);
     
     const codeSample =
-`<div style="display: flex; flex-direction: ${flexDirection}; justify-content: ${justifyContent}; align-items: ${alignItems};">${childrenArr.sort((a, b) => a.sourceOrder - b.sourceOrder).map(child => `\n\t<div class="flex-child box-${child.sourceOrder}"` + (child.orderOverride ? ` style="order: ${child.orderOverride};"`: "")  + `>${child.sourceOrder} of 3</div>`)}
+`<div style="display: flex; flex-direction: ${flexDirection}; justify-content: ${justifyContent}; align-items: ${alignItems};">${childrenArr.sort((a, b) => a.sourceOrder - b.sourceOrder).map(child => `\n\t<div class="flex-child box-${child.sourceOrder}"` + (child.orderOverride ? ` style="order: ${child.orderOverride};"`: "")  + `>${child.sourceOrder} of 3</div>`).join("")}
 </div>`;
 
     const columnData: IOptionColumnData[] = [
