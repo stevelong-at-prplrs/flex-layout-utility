@@ -12,7 +12,7 @@
   "repository": "https://github.com/stevelong-at-prplrs/flex-layout-utility.git",
   "homepage": "https://stevelong-at-prplrs.github.io/flex-layout-utility/",
   "author": "Steve Long",
-  "license": "ISC",
+  "license": "Unlicense",
   "dependencies": {
     "concurrently": "^6.1.0",
     "react": "^16.13.1",
