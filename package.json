@@ -9,10 +9,7 @@
     "bs": "gulp browser-sync",
     "dev": "concurrently \"npm run bs\" \"npm run webpack-watch\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/stevelong-at-prplrs/flex-layout-utility.git"
-  },
+  "repository": "https://github.com/stevelong-at-prplrs/flex-layout-utility.git",
   "homepage": "https://stevelong-at-prplrs.github.io/flex-layout-utility/",
   "author": "Steve Long",
   "license": "ISC",
