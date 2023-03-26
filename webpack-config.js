@@ -1,29 +1,44 @@
-var path = require("path");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshTypeScript = require('react-refresh-typescript');
+const isDevelopment = process.env.NODE_ENV !== 'production';
+const path = require("path");
 
-module.exports = [{
+module.exports = {
     entry: [path.resolve(__dirname, "./src/index.tsx")],
-    mode: "development",
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "./docs")
+    devServer: {
+      compress: true,
+      hot: true,
+      port: 9000,
+      static: {
+        directory: path.join(__dirname, 'docs'),
+      }
     },
+    mode: isDevelopment ? 'development' : 'production',
     module: {
-        rules: [
+      rules: [
+        {
+          test: /\.[jt]sx?$/,
+          exclude: /node_modules/,
+          use: [
             {
-                test: /\.tsx?$/,
-                loader: "ts-loader?{configFile: \"tsconfig.json\"}",
-                include: [path.resolve(__dirname, "./src"), path.resolve(__dirname, "./components")],
-                options: { allowTsInNodeModules: true }
-            }
-        ]
+              loader: "ts-loader?{configFile: \"tsconfig.json\"}",
+              options: {
+                getCustomTransformers: () => ({
+                  before: [isDevelopment && ReactRefreshTypeScript()].filter(Boolean),
+                }),
+                transpileOnly: isDevelopment,
+              },
+            },
+          ],
+        },
+      ],
     },
+    output: {
+      filename: "bundle.js",
+      path: path.resolve(__dirname, 'docs')
+    },
+    plugins: [isDevelopment && new ReactRefreshWebpackPlugin()].filter(Boolean),
     resolve: {
-        extensions: [".tsx", ".ts",".jsx",".js",]
+        extensions: ['.ts', '.js', '.tsx', '.jsx'],
     },
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    },
-    // devtool: "source-map",
-    watch: true
-}];
+  };
