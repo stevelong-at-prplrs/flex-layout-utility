@@ -37,7 +37,7 @@ interface IOrderOptionColumnData {
 
 interface IFlexChildProps {
     sourceOrder: number;
-    orderOverride?: number;
+    orderOverride: number;
 }
 
 // Data
@@ -91,7 +91,7 @@ const alignItemsOptions: IFlexOption<AlignItems>[] = [
 ]
 
 interface IChildOrderOptions {
-    orderOverride: number
+    orderOverride?: number
 }
 
 const childOrderOptions: IChildOrderOptions[] = [
