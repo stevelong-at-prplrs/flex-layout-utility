@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --config webpack-config.js --node-env=production --output-path docs",
     "dev": "webpack-dev-server --config webpack-config.js --output-path docs --hot",
-    "serve": "serve docs"
+    "serve": "serve docs",
+    "ts": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
