@@ -4,7 +4,7 @@
   "description": "An interactive CSS generator for Flexbox layouts.",
   "browser": "docs/index.html",
   "scripts": {
-    "bundle": "webpack --config webpack-config.js --env=development",
+    "build": "webpack --config webpack-config.js --env=development --output-path docs",
     "dev": "webpack-dev-server --config webpack-config.js --hot",
     "serve": "serve docs"
   },
