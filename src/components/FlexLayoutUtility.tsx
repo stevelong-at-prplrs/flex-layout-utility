@@ -125,7 +125,7 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
     const [flexDirection, setFlexDirection] = React.useState<FlexDirection>("row");
     const [justifyContent, setJustifyContent] = React.useState<JustifyContent>("center");
     const [alignItems, setAlignItems] = React.useState<AlignItems>("center");
-    const copyButtonRef: React.LegacyRef<HTMLButtonElement> = React.useRef();
+    const copyButtonRef = React.useRef<HTMLButtonElement>();
       
     const children = <>
         <div className="flex-child box-1">1 of 3</div>
@@ -179,7 +179,7 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
                 {navigator.clipboard ?
                     <button
                         className="copy-button"
-                        ref={copyButtonRef}
+                        ref={copyButtonRef as React.RefObject<HTMLButtonElement>}
                         onFocus={() => {if (copyButtonRef?.current) copyButtonRef.current.blur()}}
                         onClick={() => copyToClipBoard(codeSample)}>
                             Copy
