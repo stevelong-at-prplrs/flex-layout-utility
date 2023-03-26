@@ -1,5 +1,5 @@
 import * as React from "react";
-import FlexLayoutUtility from "../components/FlexLayoutUtility";
+import FlexLayoutUtility from "./components/FlexLayoutUtility";
 
 export const App = (): JSX.Element => <>
             <div className="container-fluid title-bar">

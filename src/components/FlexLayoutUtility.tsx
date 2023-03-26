@@ -3,6 +3,8 @@ import { Container, Row, Col } from 'react-grid-system';
 
 // Types
 
+// change these to enums? 
+
 type FlexDirection = "row" | "column" | "row-reverse" | "column-reverse";
 type JustifyContent = "flex-start" | "center" | "flex-end" | "space-evenly" | "space-around" | "space-between";
 type AlignItems = "flex-start" | "center" | "flex-end" | "stretch" | "baseline" | "initial" | "inherit";

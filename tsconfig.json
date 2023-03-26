@@ -11,7 +11,7 @@
             "DOM",
             "ESNext"
         ],
-        "outDir": "./dist",
+        "outDir": "./docs",
         "declaration": false,
         "jsx": "react",
         "baseUrl": "."

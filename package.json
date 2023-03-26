@@ -4,10 +4,9 @@
   "description": "An interactive CSS generator for Flexbox layouts.",
   "browser": "docs/index.html",
   "scripts": {
-    "serve": "serve docs",
-    "webpack-watch": "webpack --config webpack-config.js",
-    "bs": "gulp browser-sync",
-    "dev": "concurrently \"npm run bs\" \"npm run webpack-watch\""
+    "build": "webpack --config webpack-config.js --env=development --output-path docs",
+    "dev": "webpack-dev-server --config webpack-config.js --hot",
+    "serve": "serve docs"
   },
   "repository": {
     "type": "git",
@@ -17,17 +16,18 @@
   "author": "Steve Long",
   "license": "Unlicense",
   "dependencies": {
-    "browser-sync": "^2.27.11",
-    "concurrently": "^6.1.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-grid-system": "^7.1.2",
+    "react-refresh": "^0.14.0",
     "serve": "^14.1.2",
     "ts-loader": "^9.4.2",
     "webpack": "^5.76.0",
-    "webpack-cli": "^5.0.1"
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
   },
   "devDependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@types/jest": "^26.0.0",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
@@ -38,10 +38,8 @@
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
-    "gulp": "^4.0.2",
-    "jest": "^26.0.1",
-    "react-test-renderer": "^16.13.1",
+    "react-refresh-typescript": "^2.0.7",
     "tslint": "^6.1.1",
-    "typescript": "^3.8.3"
+    "typescript": "^4.9.4"
   }
 }
