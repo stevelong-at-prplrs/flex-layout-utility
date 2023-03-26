@@ -11,7 +11,7 @@ type AlignItems = "flex-start" | "center" | "flex-end" | "stretch" | "baseline" 
 type ColumnName = "flex-direction" | "justify-content" | "align-items";
 type AllOptions = FlexDirection | JustifyContent | AlignItems;
 
-interface IFlexOption<T extends AllOptions> {
+interface IFlexOption<T> {
     cssValue: T;
     disabled?: boolean;
 }
@@ -22,11 +22,11 @@ interface IRadioButtonGenerator extends IFlexOption<AllOptions> {
     checked: boolean;
 }
 
-interface IOptionColumnData {
+interface IOptionColumnData<T> {
     name: ColumnName;
-    flexOptionsArr: IFlexOption<AllOptions>[];
-    currentSelection: AllOptions;
-    setSelection: React.Dispatch<React.SetStateAction<AllOptions>>;
+    flexOptionsArr: IFlexOption<T>[];
+    currentSelection: T;
+    setSelection: (x: any) => void;
 }
 
 // Data
@@ -107,7 +107,7 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
         </label>
     </div>;
 
-  const ControlColumn = (props: IOptionColumnData): JSX.Element =>
+  const ControlColumn = (props: IOptionColumnData<FlexDirection> | IOptionColumnData<JustifyContent> | IOptionColumnData<AlignItems>): JSX.Element =>
     <Col>
         <h5>{props.name}</h5>
         {props.flexOptionsArr.map((radioOption, ind) =>
@@ -140,7 +140,7 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
     <div className="box-3">3 of 3</div>
 </div>`;
 
-    const columnData: IOptionColumnData[] = [
+    const columnData: [IOptionColumnData<FlexDirection>, IOptionColumnData<JustifyContent>, IOptionColumnData<AlignItems>] = [
         {
             name: "flex-direction",
             flexOptionsArr: flexDirectionOptions,
