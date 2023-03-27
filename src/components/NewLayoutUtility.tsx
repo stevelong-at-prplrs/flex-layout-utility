@@ -15,7 +15,7 @@ interface IFlexOption<T extends AllOptions> {
     disabled?: boolean;
 }
 
-interface IRadioButtonGenerator extends IFlexOption<AllOptions> {
+interface IRadioButtonGeneratorProps extends IFlexOption<AllOptions> {
     propkey: string;
     onChange: () => void;
     checked: boolean;
@@ -120,7 +120,7 @@ const copyToClipBoard = async (txtToCopy: string): Promise<void> => {
     } else alert("Copy to clipboard not supported in your browser")
   };
 
-const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
+const RadioButtonGenerator = (props: IRadioButtonGeneratorProps): JSX.Element =>
     <div className="form-check">
         <input
             disabled={props.disabled}
