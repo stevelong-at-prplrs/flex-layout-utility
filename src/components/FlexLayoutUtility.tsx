@@ -3,78 +3,97 @@ import { Container, Row, Col } from 'react-grid-system';
 
 // Types
 
-// change these to enums? 
+enum PropertyName {
+    FlexDirection = "flex-direction",
+    JustifyContent = "justify-content",
+    AlignItems = "align-items"
+}
 
-type FlexDirection = "row" | "column" | "row-reverse" | "column-reverse";
-type JustifyContent = "flex-start" | "center" | "flex-end" | "space-evenly" | "space-around" | "space-between";
-type AlignItems = "flex-start" | "center" | "flex-end" | "stretch" | "baseline" | "initial" | "inherit";
-type ColumnName = "flex-direction" | "justify-content" | "align-items";
-type AllOptions = FlexDirection | JustifyContent | AlignItems;
+enum AllOptions {
+    Row = "row",
+    Column = "column",
+    RowReverse = "row-reverse",
+    ColumnReverse = "column-reverse",
+    FlexStart = "flex-start",
+    SpaceEvenly = "space-evenly",
+    SpaceAround =  "space-around",
+    SpaceBetween = "space-between",
+    Center = "center",
+    FlexEnd =  "flex-end",
+    Stretch = "stretch",
+    Baseline =  "baseline",
+    Initial = "initial",
+    Inherit = "inherit"
+}
 
-interface IFlexOption<T extends AllOptions> {
+type FlexDirection = AllOptions.Row | AllOptions.Column | AllOptions.RowReverse | AllOptions.ColumnReverse;
+type JustifyContent = AllOptions.FlexStart | AllOptions.Center | AllOptions.FlexEnd | AllOptions.SpaceEvenly | AllOptions.SpaceAround | AllOptions.SpaceBetween;
+type AlignItems = AllOptions.FlexStart | AllOptions.Center | AllOptions.FlexEnd | AllOptions.Stretch | AllOptions.Baseline | AllOptions.Initial | AllOptions.Inherit;;
+
+interface IFlexOption<T> {
     cssValue: T;
     disabled?: boolean;
 }
 
-interface IRadioButtonGenerator extends IFlexOption<AllOptions> {
+interface IRadioButtonGenerator<T> extends IFlexOption<T> {
     propkey: string;
     onChange: () => void;
     checked: boolean;
 }
 
-interface IOptionColumnData {
-    name: ColumnName;
-    flexOptionsArr: IFlexOption<AllOptions>[];
-    currentSelection: AllOptions;
-    setSelection: React.Dispatch<React.SetStateAction<AllOptions>>;
+interface IControlColumnProps<T> {
+    name: PropertyName;
+    flexOptionsArr: IFlexOption<T>[];
+    currentSelection: T;
+    setSelection: React.Dispatch<React.SetStateAction<T>>;
 }
 
 // Data
 
 const flexDirectionOptions: IFlexOption<FlexDirection>[] = [
     {
-        cssValue: "row"
+        cssValue: AllOptions.Row
     }, {
-        cssValue: "column"
+        cssValue: AllOptions.Column
     }, {
-        cssValue: "row-reverse"
+        cssValue: AllOptions.RowReverse
     }, {
-        cssValue: "column-reverse"
+        cssValue: AllOptions.ColumnReverse
     },
 ];
 
 const justifyContentOptions: IFlexOption<JustifyContent>[] = [
     {
-        cssValue: "flex-start"
+        cssValue: AllOptions.FlexStart
     }, {
-        cssValue: "center"
+        cssValue: AllOptions.Center
     }, {
-        cssValue: "flex-end"
+        cssValue: AllOptions.FlexEnd
     }, {
-        cssValue: "space-evenly"
+        cssValue: AllOptions.SpaceEvenly
     }, {
-        cssValue: "space-around"
+        cssValue: AllOptions.SpaceAround
     }, {
-        cssValue: "space-between"
+        cssValue: AllOptions.SpaceBetween
     }
 ]
 
 const alignItemsOptions: IFlexOption<AlignItems>[] = [
     {
-        cssValue: "flex-start"
+        cssValue: AllOptions.FlexStart
     }, {
-        cssValue: "center"
+        cssValue: AllOptions.Center
     }, {
-        cssValue: "flex-end"
+        cssValue: AllOptions.FlexEnd
     }, {
-        cssValue: "stretch"
+        cssValue: AllOptions.Stretch
     }, {
-        cssValue: "baseline"
+        cssValue: AllOptions.Baseline
     }, {
-        cssValue: "initial",
+        cssValue: AllOptions.Initial,
         disabled: true
     }, {
-        cssValue: "inherit",
+        cssValue: AllOptions.Inherit,
         disabled: true
     }
 ]
@@ -92,7 +111,7 @@ const copyToClipBoard = async (txtToCopy: string): Promise<void> => {
     } else alert("Copy to clipboard not supported in your browser")
   };
 
-const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
+const RadioButtonGenerator = (props: IRadioButtonGenerator<AllOptions>): JSX.Element =>
     <div className="form-check">
         <input
             disabled={props.disabled}
@@ -107,7 +126,7 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
         </label>
     </div>;
 
-  const ControlColumn = (props: IOptionColumnData): JSX.Element =>
+  const ControlColumn = (props: IControlColumnProps<any>): JSX.Element =>
     <Col>
         <h5>{props.name}</h5>
         {props.flexOptionsArr.map((radioOption, ind) =>
@@ -122,10 +141,10 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
   
   const FlexLayoutUtility = (): JSX.Element => {
       
-    const [flexDirection, setFlexDirection] = React.useState<FlexDirection>("row");
-    const [justifyContent, setJustifyContent] = React.useState<JustifyContent>("center");
-    const [alignItems, setAlignItems] = React.useState<AlignItems>("center");
-    const copyButtonRef: React.LegacyRef<HTMLButtonElement> = React.useRef();
+    const [flexDirection, setFlexDirection] = React.useState<FlexDirection>(AllOptions.Row);
+    const [justifyContent, setJustifyContent] = React.useState<JustifyContent>(AllOptions.Center);
+    const [alignItems, setAlignItems] = React.useState<AlignItems>(AllOptions.Center);
+    const copyButtonRef = React.useRef<HTMLButtonElement>();
       
     const children = <>
         <div className="flex-child box-1">1 of 3</div>
@@ -135,24 +154,24 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
     
     const codeSample =
 `<div style="display: flex; flex-direction: ${flexDirection}; justify-content: ${justifyContent}; align-items: ${alignItems};">
-    <div className="box-1">1 of 3</div>
-    <div className="box-2">2 of 3</div>
-    <div className="box-3">3 of 3</div>
+    <div class="box-1">1 of 3</div>
+    <div class="box-2">2 of 3</div>
+    <div class="box-3">3 of 3</div>
 </div>`;
 
-    const columnData: IOptionColumnData[] = [
+    const columnData: [IControlColumnProps<FlexDirection>, IControlColumnProps<JustifyContent>, IControlColumnProps<AlignItems>] = [
         {
-            name: "flex-direction",
+            name: PropertyName.FlexDirection,
             flexOptionsArr: flexDirectionOptions,
             currentSelection: flexDirection,
             setSelection: setFlexDirection
         }, {
-            name: "justify-content",
+            name: PropertyName.JustifyContent,
             flexOptionsArr: justifyContentOptions,
             currentSelection: justifyContent,
             setSelection: setJustifyContent
         }, {
-            name: "align-items",
+            name: PropertyName.AlignItems,
             flexOptionsArr: alignItemsOptions,
             currentSelection: alignItems,
             setSelection: setAlignItems
@@ -170,7 +189,7 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
                     flexDirection,
                     justifyContent,
                     alignItems
-                }} >
+                }}>
                 {children}
             </div>
             <br />
@@ -179,7 +198,7 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
                 {navigator.clipboard ?
                     <button
                         className="copy-button"
-                        ref={copyButtonRef}
+                        ref={copyButtonRef as React.RefObject<HTMLButtonElement>}
                         onFocus={() => {if (copyButtonRef?.current) copyButtonRef.current.blur()}}
                         onClick={() => copyToClipBoard(codeSample)}>
                             Copy
