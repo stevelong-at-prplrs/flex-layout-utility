@@ -13,7 +13,7 @@
 .flex-parent {
     display: flex;
     height: 600px;
-    background: url(svg-backgrnd.svg);
+    background: url(svg_background.svg);
 }
 
 .flex-child {
