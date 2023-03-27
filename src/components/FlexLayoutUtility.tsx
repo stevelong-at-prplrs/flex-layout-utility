@@ -56,7 +56,7 @@ type AlignItems = AllOptions.FlexStart | AllOptions.Center | AllOptions.FlexEnd 
 // type AllOptions = FlexDirection | JustifyContent | AlignItems;
 type ColumnName = "flex-direction" | "justify-content" | "align-items";
 
-interface IFlexOption<T extends any> {
+interface IFlexOption<T extends AllOptions> {
     cssValue: T;
     disabled?: boolean;
 }
@@ -67,7 +67,7 @@ interface IRadioButtonGenerator extends IFlexOption<FlexDirection | JustifyConte
     checked: boolean;
 }
 
-interface IOptionColumnData<T extends any> {
+interface IOptionColumnData<T extends AllOptions> {
     name: ColumnName;
     flexOptionsArr: IFlexOption<T>[];
     currentSelection: T;
@@ -76,7 +76,7 @@ interface IOptionColumnData<T extends any> {
 
 interface IControlColumnProps {
     name: ColumnName;
-    flexOptionsArr: IFlexOption<any>[];
+    flexOptionsArr: IFlexOption<AllOptions>[];
     currentSelection: FlexDirection | JustifyContent | AlignItems;
     setSelection: (value: any) => void;
 }
