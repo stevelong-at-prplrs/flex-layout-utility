@@ -3,78 +3,130 @@ import { Container, Row, Col } from 'react-grid-system';
 
 // Types
 
-// change these to enums? 
+enum AllOptions {
+    Row = "row",
+    Column = "column",
+    RowReverse = "row-reverse",
+    ColumnReverse = "column-reverse",
+    FlexStart = "flex-start",
+    SpaceEvenly = "space-evenly",
+    SpaceAround =  "space-around",
+    SpaceBetween = "space-between",
+    Center = "center",
+    FlexEnd =  "flex-end",
+    Stretch = "stretch",
+    Baseline =  "baseline",
+    Initial = "initial",
+    Inherit = "inherit"
+}
 
-type FlexDirection = "row" | "column" | "row-reverse" | "column-reverse";
-type JustifyContent = "flex-start" | "center" | "flex-end" | "space-evenly" | "space-around" | "space-between";
-type AlignItems = "flex-start" | "center" | "flex-end" | "stretch" | "baseline" | "initial" | "inherit";
+type FlexDirection = AllOptions.Row | AllOptions.Column | AllOptions.RowReverse | AllOptions.ColumnReverse;
+type JustifyContent = AllOptions.FlexStart | AllOptions.Center | AllOptions.FlexEnd | AllOptions.SpaceEvenly | AllOptions.SpaceAround | AllOptions.SpaceBetween;
+type AlignItems = AllOptions.FlexStart | AllOptions.Center | AllOptions.FlexEnd | AllOptions.Stretch | AllOptions.Baseline | AllOptions.Initial | AllOptions.Inherit;;
+
+// enum FlexDirection {
+    // Row = "row",
+    // Column = "column",
+    // RowReverse = "row-reverse",
+    // ColumnReverse = "column-reverse"
+// }
+
+// enum JustifyContent {
+//     FlexStart = "flex-start",
+//     Center = "center",
+//     FlexEnd =  "flex-end",
+//     SpaceEvenly = "space-evenly",
+//     SpaceAround =  "space-around",
+//     SpaceBetween = "space-between"
+// }
+
+// enum AlignItems {
+//     FlexStart = "flex-start",
+//     Center = "center",
+//     FlexEnd =  "flex-end",
+//     Stretch = "stretch",
+//     Baseline =  "baseline",
+//     Initial = "initial",
+//     Inherit = "inherit"
+// }
+
+// type FlexDirection = "row" | "column" | "row-reverse" | "column-reverse";
+// type JustifyContent = "flex-start" | "center" | "flex-end" | "space-evenly" | "space-around" | "space-between";
+// type AlignItems = "flex-start" | "center" | "flex-end" | "stretch" | "baseline" | "initial" | "inherit";
+// type AllOptions = FlexDirection | JustifyContent | AlignItems;
 type ColumnName = "flex-direction" | "justify-content" | "align-items";
-type AllOptions = FlexDirection | JustifyContent | AlignItems;
 
-interface IFlexOption<T> {
+interface IFlexOption<T extends any> {
     cssValue: T;
     disabled?: boolean;
 }
 
-interface IRadioButtonGenerator extends IFlexOption<AllOptions> {
+interface IRadioButtonGenerator extends IFlexOption<FlexDirection | JustifyContent | AlignItems> {
     propkey: string;
     onChange: () => void;
     checked: boolean;
 }
 
-interface IOptionColumnData<T> {
+interface IOptionColumnData<T extends any> {
     name: ColumnName;
     flexOptionsArr: IFlexOption<T>[];
     currentSelection: T;
-    setSelection: (x: any) => void;
+    setSelection: (x: T) => void;
+}
+
+interface IControlColumnProps {
+    name: ColumnName;
+    flexOptionsArr: IFlexOption<any>[];
+    currentSelection: FlexDirection | JustifyContent | AlignItems;
+    setSelection: (value: any) => void;
 }
 
 // Data
 
 const flexDirectionOptions: IFlexOption<FlexDirection>[] = [
     {
-        cssValue: "row"
+        cssValue: AllOptions.Row
     }, {
-        cssValue: "column"
+        cssValue: AllOptions.Column
     }, {
-        cssValue: "row-reverse"
+        cssValue: AllOptions.RowReverse
     }, {
-        cssValue: "column-reverse"
+        cssValue: AllOptions.ColumnReverse
     },
 ];
 
 const justifyContentOptions: IFlexOption<JustifyContent>[] = [
     {
-        cssValue: "flex-start"
+        cssValue: AllOptions.FlexStart
     }, {
-        cssValue: "center"
+        cssValue: AllOptions.Center
     }, {
-        cssValue: "flex-end"
+        cssValue: AllOptions.FlexEnd
     }, {
-        cssValue: "space-evenly"
+        cssValue: AllOptions.SpaceEvenly
     }, {
-        cssValue: "space-around"
+        cssValue: AllOptions.SpaceAround
     }, {
-        cssValue: "space-between"
+        cssValue: AllOptions.SpaceBetween
     }
 ]
 
 const alignItemsOptions: IFlexOption<AlignItems>[] = [
     {
-        cssValue: "flex-start"
+        cssValue: AllOptions.FlexStart
     }, {
-        cssValue: "center"
+        cssValue: AllOptions.Center
     }, {
-        cssValue: "flex-end"
+        cssValue: AllOptions.FlexEnd
     }, {
-        cssValue: "stretch"
+        cssValue: AllOptions.Stretch
     }, {
-        cssValue: "baseline"
+        cssValue: AllOptions.Baseline
     }, {
-        cssValue: "initial",
+        cssValue: AllOptions.Initial,
         disabled: true
     }, {
-        cssValue: "inherit",
+        cssValue: AllOptions.Inherit,
         disabled: true
     }
 ]
@@ -107,7 +159,7 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
         </label>
     </div>;
 
-  const ControlColumn = (props: IOptionColumnData<FlexDirection> | IOptionColumnData<JustifyContent> | IOptionColumnData<AlignItems>): JSX.Element =>
+  const ControlColumn = (props: IControlColumnProps): JSX.Element =>
     <Col>
         <h5>{props.name}</h5>
         {props.flexOptionsArr.map((radioOption, ind) =>
@@ -122,9 +174,9 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
   
   const FlexLayoutUtility = (): JSX.Element => {
       
-    const [flexDirection, setFlexDirection] = React.useState<FlexDirection>("row");
-    const [justifyContent, setJustifyContent] = React.useState<JustifyContent>("center");
-    const [alignItems, setAlignItems] = React.useState<AlignItems>("center");
+    const [flexDirection, setFlexDirection] = React.useState<FlexDirection>(AllOptions.Row);
+    const [justifyContent, setJustifyContent] = React.useState<JustifyContent>(AllOptions.Center);
+    const [alignItems, setAlignItems] = React.useState<AlignItems>(AllOptions.Center);
     const copyButtonRef = React.useRef<HTMLButtonElement>();
       
     const children = <>
@@ -170,7 +222,7 @@ const RadioButtonGenerator = (props: IRadioButtonGenerator): JSX.Element =>
                     flexDirection,
                     justifyContent,
                     alignItems
-                }} >
+                }}>
                 {children}
             </div>
             <br />
