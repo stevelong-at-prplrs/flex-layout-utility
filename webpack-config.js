@@ -33,10 +33,6 @@ module.exports = {
         },
       ],
     },
-    // output: {
-    //   filename: "bundle.js",
-    //   path: path.resolve(__dirname, 'docs')
-    // },
     plugins: [isDevelopment && new ReactRefreshWebpackPlugin()].filter(Boolean),
     resolve: {
         extensions: ['.ts', '.js', '.tsx', '.jsx'],
