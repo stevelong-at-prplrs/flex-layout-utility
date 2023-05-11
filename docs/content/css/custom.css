@@ -44,9 +44,10 @@
 }
 
 .flex-parent {
+    background: url(svg_background.svg);
+    border-radius: 5px;
     display: flex;
     height: 600px;
-    background: url(svg_background.svg);
 }
 
 .flex-child {
