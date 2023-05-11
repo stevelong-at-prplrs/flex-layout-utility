@@ -1,8 +1,41 @@
 .title-bar {
-    background-color: #7c3392;
+    align-items: center;
+    background-color: #30b2c3;
     color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
     padding: 1rem;
     margin-bottom: 1rem;
+}
+
+.default {
+    background-color: #7c3392;
+}
+
+.blue {
+    background-color: #1854eb;
+}
+
+.loaded::after {
+    content: "Theme loaded"
+}
+
+.loading::after {
+    animation: 2s linear infinite condemned_blink_effect;
+    content: "⌛Loading Theme"
+}
+  
+@keyframes condemned_blink_effect {
+0% {
+    opacity: 0;
+}
+50% {
+    opacity: 1;
+}
+100% {
+    opacity: 0;
+}
 }
 
 .preformatted-pagetitle {
